@@ -1,1 +1,62 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
+
+int main() {
+    int userChoice, computerChoice;
+    int userScore = 0, computerScore = 0;
+    const int maxScore = 5;
+
+    printf("Rock, Paper, Scissors Game!\n");
+    printf("First to score 5 points wins.\n");
+
+    srand(time(NULL));
+
+    while (userScore < maxScore && computerScore < maxScore) {
+        printf("\nChoose [0] Rock, [1] Paper, [2] Scissors: ");
+        scanf("%d", &userChoice);
+
+
+        if (userChoice < 0 || userChoice > 2) {
+            printf("Invalid choice. Please enter 0, 1, or 2.\n");
+            continue;
+        }
+
+        computerChoice = rand() % 3;
+        
+        switch (userChoice) {
+            case 0: printf("You chose Rock\n"); break;
+            case 1: printf("You chose Paper\n"); break;
+            case 2: printf("You chose Scissors\n"); break;
+        }
+
+        switch (computerChoice) {
+            case 0: printf("Computer chose Rock\n"); break;
+            case 1: printf("Computer chose Paper\n"); break;
+            case 2: printf("Computer chose Scissors\n"); break;
+        }
+
+        if (userChoice == computerChoice) {
+            printf("It's a draw!\n");
+        } else if ((userChoice == 0 && computerChoice == 2) ||
+                   (userChoice == 1 && computerChoice == 0) ||
+                   (userChoice == 2 && computerChoice == 1)) {
+            printf("You win this round!\n");
+            userScore++;
+        } else {
+            printf("Computer wins this round!\n");
+            computerScore++;
+        }
+
+        printf("Score: You %d, Computer %d\n", userScore, computerScore);
+    }
+
+    if (userScore == maxScore) {
+        printf("\nCongratulations! You've reached 5 points and won the game!\n");
+    } else {
+        printf("\nComputer reaches 5 points first. You lose the game!\n");
+    }
+
+    return 0;
+}
 
